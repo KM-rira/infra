@@ -33,6 +33,19 @@ services:
     depends_on:
       - postgres
 
+  hono-note-backend:
+    image: ghcr.io/${GH_USER}/hono-note-backend:${TAG:-latest}
+    restart: always
+    ports:
+      - "9010:9010"
+    environment:
+      NODE_ENV: production
+      PORT: 9010
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+    depends_on:
+      - redis
+
   linkhub:
     image: ghcr.io/${GH_USER}/linkhub:${TAG:-latest}
     restart: always
